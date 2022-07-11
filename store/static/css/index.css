@@ -1,0 +1,163 @@
+
+:root{
+    --dorado: rgb(220, 166, 90);
+}
+
+.text-dorado{
+    color: var(--dorado);
+    text-decoration: none;
+}
+
+
+.text-dorado:hover{
+    color: rgb(204, 151, 77);
+}
+
+
+.logo{
+    padding: 0.3em;
+    color: var(--dorado);
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.logo span{
+    background: var(--dorado);
+    color: #fff;
+    border-radius: 3px;
+    padding: 0 5px 4px 5px;
+}
+
+.logo:hover{
+    color: var(--dorado);
+}
+
+
+.cartImg{ width: 32px; }
+
+#cartTotal{ 
+    position: relative;
+    left: -10px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: #ff0000;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+
+.cartBtn{
+    width: auto;
+    background: var(--dorado);
+    font-weight: 400;
+    outline: none;
+    border: 0;
+    font-weight: 400;
+}
+
+.menuauth{
+    text-decoration: none;
+}
+
+.menuauth:hover{
+    text-decoration: none;
+    color: rgb(204, 151, 77);
+}
+
+
+.cartBtn:focus{
+    background: var(--dorado);
+}
+
+.cartBtn:hover{
+    background: rgb(204, 151, 77);
+    color: #fff;
+}
+
+
+.cartImgProduct{ width: 60px;  object-fit: cover; }
+
+.selecCantidad img{
+    width: 15px;
+    height: 15px;
+
+}
+
+.ps{
+    height: 48px;
+    line-height: 48px;
+}
+
+.titleTable{
+    width: 150px;
+    overflow: hidden;
+}
+
+.titleRegis{
+    border-radius: 3px 3px 0 0;
+}
+
+.errorlist{
+    list-style: none;
+    color: #ff0000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fotante{
+    position: absolute;
+    right: 5px;
+    top: 4px;
+}
+
+.fotante img{
+    width: 23px;
+}
+
+
+.resultado{
+    position: absolute;
+    top: 4em;
+    width: 700px;
+    height: 400px;
+    background: #fff;
+    z-index: 999;
+    border-radius: 3px;
+    display: none;
+}
+
+.resultado::before{
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    border-bottom: 10px solid rgb(33,37,41);
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+
+}
+
+@media screen and (min-width:1220px) {
+    .imgBusca:hover{
+        position: absolute;
+        top: 25px;
+        z-index: 999;
+        transform: scale(3);
+        background: #fff;
+    }
+    
+}
+
+.activo a{
+    background: rgb(204, 151, 77);
+    color: #000;
+}
+
+.activo:hover a{
+    background: var(--dorado);
+    color: #000;
+}

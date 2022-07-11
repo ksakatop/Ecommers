@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+
+{% block title  %} {{ producto.title }} {% endblock %}
+
+{% block content %}
+
+<div class="row my-5">
+
+    <div class="card  flex-lg-row p-0 text-dark">
+        <div class="imaprodu d-flex align-items-center justify-content-center p-2 col-12 col-lg-6 border-end position-relative">
+            <img  style="height: 500px; object-fit:contain ;" src="{{ producto.image.url }}" alt="">
+
+            
+        </div>
+
+        <div class="col-12 col-lg-6 p-3">
+            <h2 class=" text-dorado ">{{ producto.title }}</h2>
+            <span class="text-secondary mb-2 d-block">Precio: </span>
+
+            <p><strike class="me-3 text-secondary">${{ producto.marked_price }}</strike> ${{ producto.selling_price }} </p>
+
+            <span class="text-secondary mb-2 d-block">Descripcion: </span>
+            <p class="px-3">{{ producto.description }}</p>
+
+            <span class="text-secondary mb-2 d-block">Garantia: </span>
+            <p class="px-3">{{ producto.warranty }}</p>
+
+            <a href="{% url 'ecomee:addcart' producto.id %}" type="button" class="btn cartBtn mb-2">Añadir al carrito</a>
+           
+        </div>
+
+    </div>
+    
+</div>
+
+
+{% endblock content %}

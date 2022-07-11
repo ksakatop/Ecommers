@@ -1,0 +1,65 @@
+{% extends 'home.html' %}
+
+
+{% block title  %} Ecommerc {% endblock %}
+{% block content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 gx-2 gy-3 mt-5 mb-3">
+    {% for produ in producto %}
+    <div class="col">
+        <div class="card  shadow-sm">
+            <img class="p-2" style="height: 300px; object-fit:contain;" src="{{ produ.image.url}}" alt="{{ produ.title }}">
+
+          <div class="px-2 py-3">
+            <h6 class="card-text text-dark text-break m-0 mb-1" style=" height: 20px; overflow: hidden;"><strong>{{ produ.title|truncatechars:29 }}</strong></h6>
+                <hr class="my-1">
+                <div class="d-flex flex-column  justify-content-between  p-2">
+                    <small class="text-muted p-2"> Precio: <span>${{ produ.selling_price }}</span> </small>
+                    <div class="btn-group">
+                        <a href="{% url 'ecomee:product' produ.slug  %}" type="button" class="btn btn-outline-secondary p-1">Ver mas</a>
+                        <a href="{% url 'ecomee:addcart' produ.id %}" type="button" class="btn btn-outline cartBtn p-1">Añadir al carrito</a>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav aria-label="..." >
+    <ul class="pagination">
+        {% if producto.has_previous %}
+        <li class="page-item ">
+            <a class="page-link bg-dark text-dorado" href="?page={{ producto.previous_page_number }} ">Previous</a>
+         </li>
+        {% else %}
+         <li class="page-item disabled">
+            <a class="page-link bg-dark text-dorado" href="?page=1">Previous</a>
+         </li>
+        {% endif %}
+     
+
+      {% for i in producto.paginator.page_range %}
+        {% if i == producto.number %}
+            <li class="page-item activo" aria-current="page"><a class="page-link">{{ i }}</a></li>
+        {% else %}
+            <li class="page-item " aria-current="page"><a class="page-link bg-dark text-dorado" href="?page={{i}}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+
+      {% if producto.has_next %}
+        <li class="page-item ">
+            <a class="page-link bg-dark text-dorado" href="?page={{ producto.next_page_number }} ">Previous</a>
+         </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link bg-dark text-dorado" href="?page={{ producto.paginator.num_pages }}">Next</a>
+          </li>
+        {% endif %}
+
+    </ul>
+  </nav>
+
+
+{% endblock content %}

@@ -1,0 +1,103 @@
+{% extends 'home.html' %}
+
+{% block title  %} Checkout {% endblock %}
+{% block content %}
+
+
+<div class="row my-5">
+
+    <!--Datos del cliente-->
+    <div class="col-lg-6">
+        <h2 class="text-secondary">Formulario de compra</h2>
+        <div class="card p-3">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="d-flex flex-column flex-lg-row justify-content-between">
+                    <div class="col-lg-6 my-1 px-2">
+                        {{ form.ordered_by  }}
+                    </div>
+                    <div class="col-lg-6 my-1 px-2">
+                        {{ form.mobile }}
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h5 class="fs-6 text-secondary">Informacion para comprar</h5>
+                
+                <hr>
+
+                <div class="d-flex flex-column flex-lg-row justify-content-between my-2">
+                    <div class="col my-1 px-2">
+                        {{ form.shipping_address}}
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column flex-lg-row justify-content-between my-2">
+                    <div class="col my-1 px-2">
+                        {{ form.email }}
+                    </div>
+                </div>
+
+                <div class="px-2">
+                   <button class="btn cartBtn w-100">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!--total del la orden-->
+    <div class="col-lg-6 mt-lg-0 mt-5">
+        <h2 class="text-secondary">Productos a comprar</h2>
+        <div class="card p-3">
+            <div>
+                <a href="{% url 'ecomee:cart' %}" class="btn btn-outline-secondary"> Regresar al carrito </a>
+            </div>
+
+            <hr>
+
+            <h5 class="text-secondary">Total de su orden</h5>
+
+            <hr>
+
+            <div class="col table-responsive">
+                <table class="table text-center" >
+                    <thead class="bg-dark text-dorado">
+                        <tr>
+                            <th></th>
+                            <th><h6>Item</h6></th>
+                            <th> <h6>Precio</h6></th>
+                            <th><h6>Cantidad</h6></th>
+                            <th><h6>Sub Total</h6></th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+        
+                    {% for cap in cart_obj.cartproduct_set.all %}
+                        <tr>
+                            <td>
+                                <img class="cartImgProduct" src="{{ cap.product.image.url }}" alt="">
+                            </td>
+                            <td><p class="m-0 ps titleTable">{{ cap.product.title }} </p></td>
+                            <td><p class="m-0 ps"> ${{ cap.product.selling_price }} </p></td>
+                            <td> <p class="m-0 ps">{{ cap.quantity }}</p> </td>
+                            <td><p class="m-0 ps">${{ cap.subtotal }}</p></td>
+                        </tr>
+                    {% endfor %}
+
+                        <tr>
+                            <th colspan="4"  class="bg-dark text-dorado">Total</th>
+                            <th>${{ cart_obj.total }}</th>
+                        </tr>
+ 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

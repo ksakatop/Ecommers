@@ -1,0 +1,86 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title  %} Carrito de compras {% endblock %}
+{% block content %}
+
+
+
+
+<div class="row my-5">
+
+    <div class="card my-4 p-2 table-responsive">
+        <table class="table text-center" >
+            <thead class="bg-dark text-dorado">
+                <tr>
+                    <th></th>
+                    <th><h6>Item</h6></th>
+                    <th> <h6>Precio</h6></th>
+                    <th><h6>Cantidad</h6></th>
+                    <th><h6>Sub Total</h6></th>
+                    <th><h6>Accions</h6></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for cap in cart.cartproduct_set.all %}
+
+                <tr>
+                    <td>
+                        <img class="cartImgProduct" src="{{ cap.product.image.url }}" alt="">
+                    </td>
+                    <td><p class="m-0 ps">{{ cap.product.title }} </p></td>
+                    <td><p class="m-0 ps"> ${{ cap.product.selling_price }} </p></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <p class="m-0">{{ cap.quantity }}</p>
+                            <div class="selecCantidad d-flex flex-column ps-2">
+                                <a href="{% url 'ecomee:managecart' cap.id %}?accion=inc">
+                                    <img src="{% static 'images/arrow-up.png' %}" alt="">
+                                </a>
+                                <a href="{% url 'ecomee:managecart' cap.id %}?accion=dcr">
+                                    <img src="{% static 'images/arrow-down.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><p class="m-0 ps">{{ cap.subtotal }}</p></td>
+                    <td>
+                        <a class="btn btn-danger" href=" {% url 'ecomee:managecart' cap.id %}?accion=rmv ">x</a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+                
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="card p-2">
+        <div class="col">
+            <a href="{% url 'ecomee:store' %}" class="btn btn-outline-secondary"> Continua comprando</a>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="text-secondary">items:  <strong></strong></h6>
+            <h6 class="text-secondary">Total: <strong>${{ cart.total }}</strong></h6> 
+            <div>
+                <a href="{% url 'ecomee:checkout' %}" class="btn cartBtn">Checkout</a>
+                {% if cart.cartproduct_set.all %}
+                    <a href="{% url 'ecomee:empycart' %}" class="btn cartBtn">Eliminar todo</a>
+                {% else %}
+                    <span class="text-secondary">Eliminar todo</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

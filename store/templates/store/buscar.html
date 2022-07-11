@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+
+{% block title  %} Busqueda {% endblock %}
+{% block content %}
+
+
+<div class="row my-5">
+    <h3 class="text-secondary">Resultados de <span class="text-info"> "{{ request.GET.keyword }}" </span> </h3>
+
+    <div class="p-3 mb-2">
+        {% for res in resul %}
+            <div class="row row-cols-1  row-cols-md-2 g-3">
+                <div class="col-12 col-lg-4 d-flex justify-content-center position-relative">
+                    <img class="imgBusca" src="{{ res.image.url}}" alt="{{ res.title }}" style="height: 150px; object-fit:contain;">
+                </div>
+                <div class="col-12 col-lg-8">
+                    <h4><a class="text-dorado" href="{% url 'ecomee:product' res.slug  %}">{{ res.title }}</a></h4>
+                    <p>{{ res.description|truncatechars:100 }}</p>
+                    <p><strike class="me-3 text-secondary">${{ res.marked_price }}</strike> ${{ res.selling_price }} </p>
+                    <a href="{% url 'ecomee:addcart' res.id %}" type="button" class="btn cartBtn mb-2">Añadir al carrito</a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        <h4 class="text-secondary text-center">{{ erorr }}</h4>
+    </div>
+
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+{% block title  %} Productos {% endblock %}
+{% block content %}
+
+<div class="row justify-content-between my-5">
+    <h3 class="text-secondary">Todos los productos</h3>
+    {% for cate in allcategoty %}
+        <h4 class="my-3 text-dorado"> {{ cate.title }} </h4>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 gx-2 gy-3">
+            {% for produ in cate.product_set.all %}
+                <div class="col">
+                    <div class="card  shadow-sm">
+                        <img class="p-2" style="height: 300px; object-fit:contain;" src="{{ produ.image.url}}" alt="{{ produ.title }}">
+            
+                    <div class="px-2 py-3">
+                            <h6 class="card-text text-dark text-break m-0 mb-1" style=" height: 20px; overflow: hidden;"><strong>{{ produ.title|truncatechars:29 }}</strong></h6>
+                            <hr class="my-1">
+                            <div class="d-flex flex-column  justify-content-between  p-2">
+                                <small class="text-muted p-2"> Precio: <span>${{ produ.selling_price }}</span> </small>
+                                <div class="btn-group">
+                                    <a href="{% url 'ecomee:product' produ.slug  %}" type="button" class="btn btn-outline-secondary p-1">Ver mas</a>
+                                    <a href="{% url 'ecomee:addcart' produ.id %}" type="button" class="btn btn-outline cartBtn p-1">Añadir al carrito</a>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock content %}

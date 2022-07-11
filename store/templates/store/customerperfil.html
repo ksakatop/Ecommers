@@ -1,0 +1,63 @@
+{% extends 'home.html' %}
+
+{% block title  %} Perfil - {{ customer.full_name }} {% endblock %}
+{% block content %}
+
+
+<div class="row row-cols-1  g-3 my-5">
+    
+    <!--informacion del usuario-->
+    <div class="col-12 col-lg-4">
+        <div class="card">
+            <div class="bg-dark titleRegis d-flex align-items-center justify-content-center py-2">
+                <h3 class="text-dorado ">Informacion</h3>
+            </div>
+
+            <div class="p-2">
+                <p><span class="fw-bold">Nombre: </span> {{ customer.full_name }}</p>
+                <p><span class="fw-bold">Usuario: </span> {{ customer.user.username }}</p>
+                <p><span class="fw-bold">Correo: </span> {{ customer.user.email }}</p>
+                <p><span class="fw-bold">Direccion: </span> {{ customer.address }}</p>
+                <p><span class="fw-bold">Fecha compra: </span> {{ customer.join_to }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!--detalles de su orden del usuario-->
+    <div class="col-12 col-lg-8">
+        <div class="bg-dark titleRegis d-flex align-items-center justify-content-center py-2">
+            <h3 class="text-dorado ">Orden realizadas</h3>
+        </div>
+
+        <div class="col p-2 table-responsive">
+           <table class="table text-center ">
+            <thead>
+                <tr>
+                    <th class="text-secondary">SN</th>
+                    <th class="text-secondary">Orden ID</th>
+                    <th class="text-secondary">Total pagar</th>
+                    <th class="text-secondary">Fecha de pedido</th>
+                    <th class="text-secondary">Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                 {% for order in  orders %}
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> <a href="{% url 'ecomee:orderdetails' order.pk %}"> #ORDEN_{{ order.id }} </a> </td>
+                        <td> {{ order.total }} </td>
+                        <td> {{ order.create_at|timesince }} </td>
+                        <td> {{ order.order_status }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+           </table>
+        </div>
+
+       
+    </div>
+</div>
+
+{% endblock content %}

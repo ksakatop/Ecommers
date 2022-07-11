@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+
+{% block title  %} Inicio de sesion {% endblock %}
+{% block content %}
+
+
+<div class="row my-5">
+    <div class="col-12 col-sm-8 col-lg-5 m-auto">
+        <div class="card ">
+            <div class="bg-dark p-2 titleRegis">
+                <h3 class="text-center text-dorado m-0">Inicio de Sesion</h3>
+            </div>
+            <form class="p-2" method="POST">
+                {% csrf_token %}
+                
+                <div class="col-auto py-1">
+                    {{ form.username }}
+                </div>
+
+                <div class="col-auto py-1">
+                    {{ form.password }}
+                </div>
+                {% if error %}
+                    <li class="text-danger"> {{ error }} </li>
+                {% endif %}
+
+                <div class="p-2 d-flex justify-content-center">
+                    <button class="btn cartBtn w-50">Iniciar sesion</button>
+                </div>
+            </form>
+            
+            <div class="bg-dark p-2 d-flex justify-content-center">
+                <a class="menuauth p-2 text-center text-dorado" href="{% url 'ecomee:register' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">¿Eres nuevo aqui? Registrare aqui</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
